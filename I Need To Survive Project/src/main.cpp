@@ -170,6 +170,11 @@ int main() {
             std::cout << "X position of bullet: " << bulletPosition.x << std::endl; // Prints out x position of bullet sprite as it travels to the left
         }
 
+        // If bullet surpasses left side of game window, bullet is "deactivated" and resets
+        if (bulletPosition.x < -300) {
+            bulletActive = false;
+        }
+
         characterSprite.setPosition(characterPosition);
         // zombieSprite.setPosition(zombiePosition);
         bulletSprite.setPosition(bulletPosition);
