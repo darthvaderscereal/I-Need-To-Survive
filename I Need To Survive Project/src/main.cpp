@@ -67,7 +67,7 @@ int main() {
     bulletSprite.setTexture(bulletTexture);
     bulletSprite.setScale(sf::Vector2f(0.2f, 0.2f)); // Absolute scale factor
     bool bulletActive = false; 
-    float bulletSpeed = 1500.f; // Speed of the bullet
+    float bulletSpeed = 4000.f; // Speed of the bullet
 
     // Time measurement
     sf::Clock gameClock; // Measures time that has elapsed between frames (delta time)
@@ -118,8 +118,6 @@ int main() {
             }
         }
 
-        std::cout << "gun's x position: " << M1911Position.x << std::endl;
-
         // Invisible "walls" to ensure character stays within bounds
         if (characterPosition.x >= 1480.f) { // Invisible "wall" at x position of 1480
             characterPosition.x = 1480.f;
@@ -159,15 +157,17 @@ int main() {
         // std::cout << "character's x position: " << characterPosition.x << std::endl;
         // std::cout << "character's y position: " << characterPosition.y << std::endl;
 
-        // Left mouse click = gun shoots
+        // Handles shooting with left mouse click
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            std::cout << "Left mouse button clicked" << std::endl;
+            std::cout << "Left mouse button clicked" << std::endl; // Personal clarity that the button has been clicked. *Will remove eventually*
+            bulletPosition = characterPosition; // For now, bullet's initial position will "spawn" on character until fixed
             bulletActive = true;
         }
 
         // Once gun gets shot, bullet travels left relative to the game window
         if (bulletActive) {
-                bulletPosition.x -= bulletSpeed * deltaTime;
+            bulletPosition.x -= bulletSpeed * deltaTime;
+            std::cout << "X position of bullet: " << bulletPosition.x << std::endl; // Prints out x position of bullet sprite as it travels to the left
         }
 
         characterSprite.setPosition(characterPosition);
